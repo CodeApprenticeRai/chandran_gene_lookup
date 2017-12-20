@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)http://christophermanning.org/projects/building-cubic-hamiltonian-graphs-from-lcf-notation -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<base href="http://christophermanning.org">--><base href=".">
+<title>Building Hamiltonian Graphs from LCF Notation - Christopher Manning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="Description" content="Christopher Manning lives in Chicago, Illinois where he works as a software engineer.">
+
+  <meta name="thumbnail" content="http://christophermanning.org/gists/1703449/thumbnail.png">
+  <meta name="img_src" content="http://christophermanning.org/gists/1703449/thumbnail.png">
+  <meta property="og:image" content="http://christophermanning.org/gists/1703449/thumbnail.png">
+
+
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Building Hamiltonian Graphs from LCF Notation">
+
+
+	<meta property="og:url" content="http://christophermanning.org/projects/building-cubic-hamiltonian-graphs-from-lcf-notation/">
+
+
+	<meta property="og:site_name" content="Christopher Manning">
+
+
+	<meta property="article:published_time" content="2012-11-14T00:00:00+00:00">
+
+<link rel="alternate" type="application/rss+xml" title="Christopher Manning" href="http://christophermanning.org/feed.xml">
+<!-- Bootstrap -->
+<link href="./template_files/bootstrap.min.css" rel="stylesheet" media="screen">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" async="" src="./template_files/ga.js.download"></script><script src="./template_files/jquery.min.js.download"></script>
+<script src="./template_files/lazysizes.min.js.download"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="./template_files/bootstrap.min.js.download"></script>
+<link rel="shortcut icon" href="http://christophermanning.org/favicon.ico">
+</head>
+<body style="">
+<div class="navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://christophermanning.org/">Christopher Manning</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav">
+        
+        
+          
+            <li>
+              <a href="http://christophermanning.org/about" title="">About</a>
+            </li>
+          
+        
+          
+            
+            <li class="dropdown ">
+              <a href="http://christophermanning.org/#" class="dropdown-toggle" data-toggle="dropdown">Art <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="http://christophermanning.org/music" title="">Music</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://christophermanning.org/photography" title="">Photography</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://christophermanning.org/pottery" title="">Pottery</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://christophermanning.org/public_speaking" title="">Public Speaking</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://christophermanning.org/video" title="">Video</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li class="active">
+              <a href="http://christophermanning.org/projects" title="">Projects</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://christophermanning.org/writing" title="">Writing</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h1>Building Hamiltonian Graphs from LCF Notation <small>November 14, 2012</small></h1>
+
+<div><style>.gist-cache iframe { width: 960px; height: 500px; border: 1px solid #DEDEDE; }</style>
+<div class="text-center gist-cache">
+<iframe src="./template_files/1703449.html" marginwidth="0" marginheight="0" scrolling="no">&amp;nbsp;</iframe>
+<p><a href="http://christophermanning.org/gists/1703449">full screen</a> | <a href="https://gist.github.com/1703449" target="_blank">view source at gist.github.com</a></p>
+</div>
+
+
+<p>
+I found this <a href="http://mathworld.wolfram.com/LCFNotation.html">Wolfram MathWorld article on LCF notation</a> after researching bilinear interpolation. The article inspired me to build a LCF notation parser that would create the graphs using d3.js. Originally, I only planned on displaying the circular graph without animation. 
+
+</p><p>
+Adding the graph construction animation was definitely a <em>wow milestone</em>, but, after I enabled the forces on the links, it turned into a <em>woah moment</em>. The 3D structure of the graph actually reveals itself without having to build in any 3D calculations. This was a really fun project to build and it's still exciting to <a href="http://bl.ocks.org/1703449?lcfCode=[10]100&amp;animationSpeed=1&amp;lockVertices=0" target="_blank">watch it build a torus</a>.
+<!--more-->
+</p><p>
+<a href="http://oeis.org/" target="_blank">The On-Line Encyclopedia of Integer Sequences</a> is a good place to look for number series that result in interesting graphs.
+
+</p><p>
+<a href="http://plus.maths.org/">Plus magazine</a> was kind enough to feature this in "<i><a href="http://plus.maths.org/content/graph-theory-knits-torus">Graph theory knits a torus</a></i>" .
+
+</p><h3>November 14th, 2012 Update</h3>
+<ul>
+	<li>Uses <a href="http://emberjs.com/" target="_blank">Ember.js</a> to handle UI events, the graph model, and fragment URLs</li>
+	<li>Improved performance to handle much larger graphs (draws a total of <a href="http://bl.ocks.org/d/1703449/#/[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169]430/0/3" target="_blank"> 50,000 vertices and edges</a> before warning about performance)</li>
+	<li>Numbers in the LCF code are modifiable using arrow keys</li>
+	<li>Added <a href="http://bl.ocks.org/d/1703449/#/[48,44,-98,10,-39,-83,-10,46,-59,-21,-28,12,-55,56,70,70,-98,81,0,80,-50,98,-60,93,29,-16,-52,38,64,-1,62,92,-40,86,-63,-58,65,-7,10,-89,-1,-73,-17,56,70,-21,-2]6/0/0" target="_blank">random LCF code</a> generation</li>
+	<li>Added <a href="http://bl.ocks.org/d/1703449/#/[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]4/0/9" target="_blank">freeze frame</a></li>
+	<li>Added <a href="https://gist.github.com/christophermanning/1703449#file-readme-mkd" target="_blank">gallery of graphs</a></li>
+	<li>Updated Bootstrap to handle larger graphs and support full screen display</li>
+	<li>Added vertex and edge count</li>
+</ul>
+
+<a href="http://christophermanning.org/images/2012/02/cubic_hamiltonian_graph_builder.jpg">February 5th, 2012 Version Screenshot</a>
+
+<h3>Nice Things People Have Said</h3>
+<div class="row">
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Mind = Splode. Animating cubic Hamiltonian graph construction by <a href="https://twitter.com/cmanning88">@cmanning88</a> <a href="http://t.co/nEOpBF6e">http://t.co/nEOpBF6e</a> <a href="https://twitter.com/search?q=%23d3js&amp;src=hash">#d3js</a></p>— Mike Bostock (@mbostock) <a href="https://twitter.com/mbostock/statuses/164070080215384065">January 30, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Watch <a href="http://t.co/LjwsRvqh">http://t.co/LjwsRvqh</a> while listening to <a href="http://t.co/0Z5nqZbF">http://t.co/0Z5nqZbF</a></p>— Eoin Hennessy (@eoinh) <a href="https://twitter.com/eoinh/statuses/164071399084933121">January 30, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p><a href="https://twitter.com/jsantell">@jsantell</a> This is just too cool not to share. <a href="http://t.co/fjVSeapP">http://t.co/fjVSeapP</a></p>— Brian Hassinger (@brainss_) <a href="https://twitter.com/brainss_/statuses/164072563952193537">January 30, 2012</a></blockquote>
+</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Makes me very guilty about the way I spend my free time. <a href="http://t.co/Vdpjy4I6">http://t.co/Vdpjy4I6</a></p>— Joseph Kibe (@josephkibe) <a href="https://twitter.com/josephkibe/statuses/164082729699381248">January 30, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>I was about to say "this is what Flash is still good for" until I realized that this thing is SVG. <a href="http://t.co/Tniwvhvi">http://t.co/Tniwvhvi</a></p>— Tim Murtaugh (@murtaugh) <a href="https://twitter.com/murtaugh/statuses/164105182916001793">January 30, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Cubic Hamiltonian Graphs; no idea, but it looks really cool: <a href="http://t.co/PrS2NPln">http://t.co/PrS2NPln</a></p>— jsgoodies (@jsgoodies) <a href="https://twitter.com/jsgoodies/statuses/164349723799588864">January 31, 2012</a></blockquote>
+</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>I'm not sure the point of this but it's visually stunning. A great piece by <a href="https://twitter.com/cmanning88">@cmanning88</a> <a href="http://t.co/JEGYHfon">http://t.co/JEGYHfon</a></p>— Carl Stratton (@carlstratton) <a href="https://twitter.com/carlstratton/statuses/233878637739397120">August 10, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Awesome graph visualizer built in Ember and D3: <a href="http://t.co/0jsvUZCt">http://t.co/0jsvUZCt</a> via <a href="https://twitter.com/tomdale">@tomdale</a>.</p>— Peter Wagenet (@wagenet) <a href="https://twitter.com/wagenet/statuses/268850453163438081">November 14, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>My GF and I Just spent 15 mins in silence watching this redraw on slow construction speed. Time for bed methinks <a href="http://t.co/gNqBWQdXeV">http://t.co/gNqBWQdXeV</a></p>— Jonny Burch (@jonnyburch) <a href="https://twitter.com/jonnyburch/statuses/305125551281160192">February 23, 2013</a></blockquote>
+</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>hypnotic satori—could stare at graph cycle reduction animations for hours <a href="http://t.co/us4uWC7Lhr">http://t.co/us4uWC7Lhr</a></p>— korch (@korch) <a href="https://twitter.com/korch/statuses/375090294548475905">September 4, 2013</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Graph theory knits a torus <a href="http://t.co/AWy6h6Um">http://t.co/AWy6h6Um</a> (a wonderful project by Christopher Manning)</p>— Patrick Peccatte (@ppeccatte) <a href="https://twitter.com/ppeccatte/statuses/200172513026772992">May 9, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>I’m not sure what the fuck is going on here, but it looks like Ember.js, D3 and math, so I like it: <a href="http://t.co/wAsGixsL">http://t.co/wAsGixsL</a></p>— Tom Dale (@tomdale) <a href="https://twitter.com/tomdale/statuses/268844816178216960">November 14, 2012</a></blockquote>
+</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>This is sooo cute: knitting cubic Hamiltonian graphs with Christopher Manning's graph builder <a href="http://t.co/QwZ1jT7o">http://t.co/QwZ1jT7o</a></p>— Plus Magazine (@plusmathsorg) <a href="https://twitter.com/plusmathsorg/statuses/200163278092124160">May 9, 2012</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p><a href="http://t.co/Fvlxy3er">http://t.co/Fvlxy3er</a> very helpful for Data-Driven Documents ! <a href="https://twitter.com/search?q=%23d3&amp;src=hash">#d3</a> <a href="https://twitter.com/search?q=%23js&amp;src=hash">#js</a></p>— Alaa' attya (@AlaaAttya) <a href="https://twitter.com/AlaaAttya/statuses/296108022156111872">January 29, 2013</a></blockquote>
+</div>
+  </div>
+  <div class="col-md-4">
+    <div class="embed tweet"><blockquote class="twitter-tweet"><p>Another fun math visualization: Cubic Hamiltonian Graphs from LCF Notation <a href="http://t.co/zPWATdlI">http://t.co/zPWATdlI</a></p>— Allen Day (@allenday) <a href="https://twitter.com/allenday/statuses/239218195788091392">August 25, 2012</a></blockquote>
+</div>
+  </div>
+</div>
+
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<hr>
+
+  <div class="clearfix">&nbsp;</div>
+  <footer style="margin: 5em 0;">
+    <div class="row">
+      <div>
+        <ul class="list-unstyled">
+          <li class="pull-right"><a href="http://christophermanning.org/#top">Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-24780808-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</body></html>
