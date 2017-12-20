@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uf_gene_comp',
-		'USER': '****',
-		'PASSWORD': '****',
+		'USER': '',
+		'PASSWORD': '',
 		'HOST': 'uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com',
 		'PORT':'3306'
     }
