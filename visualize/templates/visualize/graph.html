@@ -34,7 +34,7 @@ var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("{% url "jdata" %}", function(d) {
+d3.json("{% url "jdata" %}?gene_symbol={{gene_symbol}}", function(d) {
 	d.name = d.name;
     d.freq = +d.freq;
   return d;
@@ -72,4 +72,4 @@ d3.json("{% url "jdata" %}", function(d) {
 </script>
 
 
-{% end block content %
+{% endblock content %}

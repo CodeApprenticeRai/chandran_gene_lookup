@@ -8,14 +8,15 @@ from . import db_interface
 def index(request):
 	context = {'':''}
 	return render(request, 'visualize/index.html')
-	
+
 def visualize(request):
-	gene_symbol = request.GET
-	
+	gene_symbol = str(request.GET)
+
 	context = { "gene_symbol": gene_symbol }
 	return render(request, 'visualize/graph.html', context)
-	
+
 
 def jdata(request):
-	data = db_interface.json(gene_symbol)
+	gene_symbol = request.GET
+	data = db_interface.get_data_json('0610005C13Rik')
 	return JsonResponse(data, safe=False)
