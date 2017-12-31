@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'djangobower',
+	'django_nvd3'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Configure this accordingly
+
+STATIC_ROOT = "C:/Users/tareg/Desktop/Projects/chandran_lab/chandran_gene_lookup/main_static/"
+
+STATICFILES_DIRS = []
+
+STATICFILES_FINDERS = [
+						'djangobower.finders.BowerFinder',
+						'django.contrib.staticfiles.finders.FileSystemFinder',
+						'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+					  ]
+
+
+
+
+
+#Bower Stuff
+
+# BOWER_COMPONENTS_ROOT = '/static/components/'
+BOWER_INSTALLED_APPS = (
+    					# 'jquery#1.9',
+    					# 'underscore',
+						)

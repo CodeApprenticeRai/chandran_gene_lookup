@@ -21,7 +21,7 @@ def get_row(gene_symbol):
 	return cursor.fetchall()[0]
 
 def get_col_names():
-	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="TareG", password="iloveyou", db="uf_gene_comp")
+	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="", password="", db="uf_gene_comp")
 
 	cursor = conn.cursor()
 
@@ -41,18 +41,27 @@ def get_data_json(gene_symbol):
 	jdata = json.dumps(data)
 	return jdata
 
+def get_data(gene_symbol, plot=False):
+	raw_freq = get_row(gene_symbol)
+	raw_names = get_col_names()
+	data = process_data(raw_names,raw_freq)
+
+	return data
+
 #Remember to add conditional functionality
-def process_data(x,y):
+def process_data(x,y, d3=False):
 	x = x[2:]
 	y = y[2:]
 	y = [float(f) for f in y ]
 
-	json_ready_data = []
 
-	for i in range(len(x)):
-		data = {}
-		data["name"] = x[i]
-		data["freq"] = y[i]
-		json_ready_data.append(data)
-
-	return json_ready_data
+	if d3 == True:
+		json_ready_data = []
+		for i in range(len(x)):
+			data = {}
+			data["name"] = x[i]
+			data["freq"] = y[i]
+			json_ready_data.append(data)
+		return json_ready_data
+	else:
+		return x,y

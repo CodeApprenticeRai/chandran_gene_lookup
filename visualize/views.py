@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.db import connections
 from django.db.models import Count
@@ -16,8 +16,27 @@ def visualize(request):
 
 	print("\n\n{}\n\n".format(gene_symbol),file=sys.stderr)
 
-	context = { "gene_symbol": gene_symbol }
-	return render(request, 'visualize/graph.html', context)
+	xdata, ydata = db_interface.get_data(gene_symbol, plot=True)
+
+	print(xdata,ydata,file=sys.stderr, sep="\n\n")
+
+
+	extra_serie1 = {"tooltip": {"y_start": "", "y_end": " cal"}}
+	chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie1 }
+	charttype = "discreteBarChart"
+	chartcontainer = 'discretebarchart_container'  # container name
+	data = {
+		'gene_symbol': gene_symbol,
+		'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': True    },
+			}
+	return render_to_response('visualize/graph.html', data)
 
 
 def jdata(request):
@@ -27,6 +46,6 @@ def jdata(request):
 
 	data = db_interface.get_data(gene_symbol)
 
-	print("\n\n{}\n\n".format(type(data[0])),file=sys.stderr)
+
 
 	return JsonResponse(data, encoder=None, safe=False)
