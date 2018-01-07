@@ -12,13 +12,13 @@ def index(request):
 	return render(request, 'visualize/index.html')
 
 def visualize(request):
+	# context = {'gene_symbol': request.GET['gene_symbol']}
 	gene_symbol = request.GET['gene_symbol']
-
-	print("\n\n{}\n\n".format(gene_symbol),file=sys.stderr)
+	# print("Gene Symbol from /visualize:\n{}\n".format(gene_symbol),file=sys.stderr)
 
 	xdata, ydata = db_interface.get_data(gene_symbol, plot=True)
 
-	print(xdata,ydata,file=sys.stderr, sep="\n\n")
+	# print(xdata,ydata,file=sys.stderr, sep="\n\n")
 
 
 	extra_serie1 = {"tooltip": {"y_start": "", "y_end": " cal"}}
@@ -34,17 +34,20 @@ def visualize(request):
             'x_is_date': False,
             'x_axis_format': '',
             'tag_script_js': True,
-            'jquery_on_ready': True    },
+            'jquery_on_ready': True,
+			 },
 			}
-	return render_to_response('visualize/graph.html', data)
 
+
+	return render_to_response('visualize/graph.html', data)
+	# return render(request,'visualize/nvd3_graph.html', context)
 
 def jdata(request):
 	gene_symbol = request.GET['gene_symbol']
 
-	print("\n\n{}\n\n".format(gene_symbol),file=sys.stderr)
+	print("//Gene Symbol\n\n{}\n\n//Gene Symbol".format(gene_symbol),file=sys.stderr)
 
-	data = db_interface.get_data(gene_symbol)
+	data = db_interface.get_data(gene_symbol, d3=True)
 
 
 

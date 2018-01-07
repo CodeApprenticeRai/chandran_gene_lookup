@@ -1,0 +1,66 @@
+{% extends 'visualize/base.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <link href="../build/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
+    <script src="../build/nv.d3.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, #chart1, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+{% block content %}
+
+<div id="chart1">
+    <svg></svg>
+</div>
+
+
+<a href="{% url "jdata" %}?gene_symbol={{gene_symbol}}">Link To JSON</a>
+<!-- <svg width="960" height="300"></svg> -->
+
+<script>
+var requestURL = "{% url "jdata" %}?gene_symbol={{gene_symbol}}";
+var request = new XMLHttpRequest();
+request.open('GET', requestURL);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+    var chartData = request.response;
+    alert(chartData);
+    return chartData;
+}
+
+nv.addGraph(function() {
+    var chart = nv.models.discreteBarChart()
+        .x(function(d) { return d.name })
+        .y(function(d) { return d.freq })
+        .staggerLabels(true)
+        //.staggerLabels(historicalBarChart[0].values.length > 8)
+        .showValues(true)
+        .duration(250)
+        ;
+    d3.select('#chart1 svg')
+        .datum(chartData)
+        .call(chart);
+    nv.utils.windowResize(chart.update);
+    return chart;
+});
+</script>
+
+
+{% endblock content %}

@@ -1,5 +1,6 @@
 import MySQLdb
 import json
+import sys
 # import plotly.plotly as ply
 # import plotly.graph_objs as go
 
@@ -17,8 +18,15 @@ def get_row(gene_symbol):
 	request_row_range = "SELECT * FROM `barreslab_rnaseq_raw_data` LIMIT 10"
 
 	cursor.execute(request_row)
+	data = cursor.fetchall()
 
-	return cursor.fetchall()[0]
+	# print("thing\n\n{}\n\nthing".format(cursor.fetchall()),file=sys.stderr)
+
+	# cursor.nextset()
+	cursor.close()
+	print("Data from get_row call:\n{}\n\n".format(data),file=sys.stderr)
+	cursor.close()
+	return data[0]
 
 def get_col_names():
 	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="", password="", db="uf_gene_comp")
@@ -27,7 +35,9 @@ def get_col_names():
 
 	request_column_names = "SHOW columns FROM {}".format("`barreslab_rnaseq_raw_data`")
 	cursor.execute(request_column_names)
-	return [desc[0] for desc in cursor.fetchall()]
+	data = cursor.fetchall()
+	cursor.close()
+	return [desc[0] for desc in data]
 
 def get_ply_plot(x,y):
 	data = [go.Bar(x,y)]
@@ -41,10 +51,11 @@ def get_data_json(gene_symbol):
 	jdata = json.dumps(data)
 	return jdata
 
-def get_data(gene_symbol, plot=False):
+def get_data(gene_symbol, plot=False, d3=False):
 	raw_freq = get_row(gene_symbol)
+	print("thing\n\n{}\n\nthing".format(raw_freq),file=sys.stderr)
 	raw_names = get_col_names()
-	data = process_data(raw_names,raw_freq)
+	data = process_data(raw_names,raw_freq, d3=d3)
 
 	return data
 

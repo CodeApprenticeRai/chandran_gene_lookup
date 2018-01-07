@@ -3212,7 +3212,7 @@ nv.models.discreteBarChart = function() {
         , showXAxis = true
         , showYAxis = true
         , rightAlignYAxis = false
-        , staggerLabels = false
+        , staggerLabels = true
         , tooltips = true
         , tooltip = function(key, x, y, e, graph) {
             return '<h3>' + x + '</h3>' +
