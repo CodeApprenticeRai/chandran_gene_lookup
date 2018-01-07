@@ -19,4 +19,6 @@ Before running pip install the following:
 - django-bower 
 - django-nvd3
 - mysqlclient
+
+
 These may be furthermore dependent on other packages. See requirements.txt. 
