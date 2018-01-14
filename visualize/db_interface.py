@@ -51,12 +51,15 @@ def get_data_json(gene_symbol):
 	jdata = json.dumps(data)
 	return jdata
 
-def get_data(gene_symbol, plot=False, d3=False):
+def get_data(gene_symbol, plot=False, d3=False, just_y=False, just_x=False):
 	raw_freq = get_row(gene_symbol)
 	print("thing\n\n{}\n\nthing".format(raw_freq),file=sys.stderr)
 	raw_names = get_col_names()
 	data = process_data(raw_names,raw_freq, d3=d3)
-
+	if just_y:
+		return data[1]
+	if just_x:
+		return data[0]
 	return data
 
 #Remember to add conditional functionality

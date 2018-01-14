@@ -3,44 +3,64 @@ from django.http import HttpResponse
 from django.db import connections
 from django.db.models import Count
 from django.http import JsonResponse
-from . import db_interface
+from . import db_interface, vis
 import sys
 
 
 def index(request):
-	context = {'':''}
-	return render(request, 'visualize/index.html')
+
+	# try:
+	# 	ng = request.GET["ng"]
+	# 	context = {'num_of_genes': [i+1 for i in range(ng)] }
+    #
+	# except Exception:
+	# 	ng=1
+	# 	context = {'num_of_genes': [i+1 for i in range(ng)], }
+    #
+
+	#Forgive me Benevolent One for the poor coding :(
+
+	ng = 1
+	context = {'num_of_genes': [i+1 for i in range(ng)],
+				'ng':ng}
+
+	return render(request, 'visualize/index.html', context)
+
+#really pathethic coding here : (
+def index2(request):
+	context = {'num_of_genes': [i+1 for i in range(2)],
+				'ng': 2,}
+	return render(request, 'visualize/index.html', context)
+
+def index3(request):
+	context = {'num_of_genes': [i+1 for i in range(3)],
+	 			'ng': 3,}
+	return render(request, 'visualize/index.html', context)
+
 
 def visualize(request):
 	# context = {'gene_symbol': request.GET['gene_symbol']}
-	gene_symbol = request.GET['gene_symbol']
+	ng = request.GET['ng']
+	gene_symbols = []
+
+	for i in range(ng):
+
+		ith_gene = request.GET['gene_symbol{}'.format(ng+1)
+		gene_symbols.append( ith_gene  )
+
+	one_gene = len( gene_symbols ) == 1
 	# print("Gene Symbol from /visualize:\n{}\n".format(gene_symbol),file=sys.stderr)
+	if one_gene:
+		data = vis.one_gene(gene_symbol)
+		return render_to_response('visualize/graph.html', data)
 
-	xdata, ydata = db_interface.get_data(gene_symbol, plot=True)
+	two_genes = len( gene_symbols ) == 2
+	if two_genes:
 
-	# print(xdata,ydata,file=sys.stderr, sep="\n\n")
-
-
-	extra_serie1 = {"tooltip": {"y_start": "", "y_end": " cal"}}
-	chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie1 }
-	charttype = "discreteBarChart"
-	chartcontainer = 'discretebarchart_container'  # container name
-	data = {
-		'gene_symbol': gene_symbol,
-		'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': False,
-            'x_axis_format': '',
-            'tag_script_js': True,
-            'jquery_on_ready': True,
-			 },
-			}
-
-
-	return render_to_response('visualize/graph.html', data)
+	three_genes = len( gene_symbols ) == 3
+	if three_genes:
 	# return render(request,'visualize/nvd3_graph.html', context)
+
 
 def jdata(request):
 	gene_symbol = request.GET['gene_symbol']

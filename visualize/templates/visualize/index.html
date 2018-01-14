@@ -4,33 +4,58 @@
 {% block content %}
 
  <section class='container'>
-    <div class='row'>
-      <div class="col-lg-12">
+   <div class="row">
+     <div class="col-lg-6">
+   <div class="btn-group">
+   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     Number of Genes to Graph  <span class="caret"></span>
+   </button>
+   <ul class="dropdown-menu">
+     <li><a href="{% url 'index' %}">1</a></li>
+     <li><a href="/index2/">2</a></li>
+     <li><a href="/index3/">3</a></li>
+   </ul>
+ </div>
+</div>
+</div>
+
+ <div id="m_fill">
+ </div>
+
+
+<div class='row'>
+      <div class="col-lg-6">
          <form action="/visualize/" method="get">
 			<div class="input-group">
-				<input type='text' class='form-control' id='only_form' name='gene_symbol' placeholder="Enter Gene Symbol" />
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="submit" id='only_button' onclick="">Search</button>
+        <input type="hidden" name="ng" value="{{ ng }}">
+
+{% for i in num_of_genes  %}
+				<input type='text' class='form-control' name='gene_symbol{{i}}' placeholder="Enter Gene Symbol {{i}}" />
+{% endfor %}
+
+
+        <span class="input-group-btn">
+					<button class="btn btn-default" type="submit" id='only_button' onclick="">Graph</button>
 				</span>
 			</div>
         </form>
-       
+
     </div>
     </div>
-	
+
   </section>
 
 <div id="m_fill">
 </div>
-  
+
 <div class='container'>
-	
+
 	<h2> How to Use:</h2>
-	
-	
-	
-	<h4>Enter the gene symbol you wish to lookup. Press the search button, and the experimental data from Barre's lab will be visualized. 
+
+
+
+	<h4>1. Select the number of genes you want to compare.<br>2. Enter the gene symbol(s) you wish to lookup.<br>3. Press the search button, and the experimental data from Barre's lab will be visualized.
 	</h4>
-	
+
 </div>
 {% endblock %}
