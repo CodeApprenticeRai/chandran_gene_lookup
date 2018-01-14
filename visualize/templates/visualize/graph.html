@@ -10,7 +10,8 @@
 
 <body>
     <div class = "container"><h2>Graph of Experimental Results
-      <br><small>Gene Symbol: {{gene_symbol}}</small></h2>
+       <!-- {%for g in gene_symbols%} {{g}}, {% endfor %}  -->
+      <br><small>Comparison of: </small></h2>
     </div>
     <div class="container"> {% include_container chartcontainer 300 1140 %} </div>
 </body>

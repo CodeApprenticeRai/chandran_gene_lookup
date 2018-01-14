@@ -43,9 +43,8 @@ def visualize(request):
 	ng = request.GET['ng']
 	gene_symbols = []
 
-	for i in range(ng):
-
-		ith_gene = request.GET['gene_symbol{}'.format(ng+1)
+	for i in range( int(ng) ):
+		ith_gene = request.GET[ 'gene_symbol{}'.format( i+1 ) ]
 		gene_symbols.append( ith_gene  )
 
 	one_gene = len( gene_symbols ) == 1
@@ -56,9 +55,13 @@ def visualize(request):
 
 	two_genes = len( gene_symbols ) == 2
 	if two_genes:
+		data = vis.multiple_genes(gene_symbols)
+		return render_to_response('visualize/graph.html', data)
 
 	three_genes = len( gene_symbols ) == 3
 	if three_genes:
+		data = vis.multiple_genes(gene_symbols)
+		return render_to_response('visualize/graph.html', data)
 	# return render(request,'visualize/nvd3_graph.html', context)
 
 
