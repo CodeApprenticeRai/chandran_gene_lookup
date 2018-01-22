@@ -1,6 +1,10 @@
 ## Log:
-01/22/2017: I've finally fixed the footer. Added multiple gene graphing (up to 3). Labels still overlap. 
-
+01/22/2017: I've finally fixed the footer. Added multiple gene graphing (up to 3). Labels still overlap. Next ideas are: 
+- Fix overlapping labels. 
+- Make text forms predictive 
+- Fix responsiveness of chart, and all page elements. 
+- Normalize database and expand data structure.
+- Use django models interface?
 
 01/07/2017: The precision issue in the graph in the graph has been fixed by specifying it in \Lib\site-packages\nvd3\discreteBarChart.py. Still need to fix the overlapping x labels. 
 
