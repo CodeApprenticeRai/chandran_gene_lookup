@@ -50,7 +50,7 @@ def visualize(request):
 	one_gene = len( gene_symbols ) == 1
 	# print("Gene Symbol from /visualize:\n{}\n".format(gene_symbol),file=sys.stderr)
 	if one_gene:
-		data = vis.one_gene(gene_symbol)
+		data = vis.one_gene(gene_symbols[0])
 		return render_to_response('visualize/graph.html', data)
 
 	two_genes = len( gene_symbols ) == 2
