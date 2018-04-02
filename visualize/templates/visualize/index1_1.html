@@ -1,0 +1,55 @@
+{% extends 'visualize/base.html' %}
+
+
+{% block content %}
+
+ <section class='container'>
+
+
+ <div id="m_fill">
+ </div>
+
+
+<div class='row'>
+      <div class="col-lg-6">
+         <form action="/visualize/" method="get">
+			<div class="input-group">
+        <div class="form-group">
+
+      <label for="exampleTextarea">Enter Gene Symbols (Comma or New Line Separated, Max 3)</label>
+      <textarea type="input" name="gene_symbols" class="form-control" id="exampleTextarea" rows="3" style="width: 610px; height: 90px;"></textarea>
+
+    </div>
+
+        <div id="m_fill">
+        </div>
+
+        <!-- <span class="input-group-btn"> -->
+					<button class="btn btn-default" type="submit" id='only_button' onclick="">Graph</button>
+				<!-- </span> -->
+
+        </form>
+
+    </div>
+    </div>
+
+  </section>
+
+<div id="m_fill">
+</div>
+
+<div class="container">
+<p class="lead">How to Use:<br>1. Select the number of genes you want to compare.<br>2. Enter the gene symbol(s) you wish to lookup.<br>3. Press the search button, and the experimental data from Barre's lab will be visualized.
+</p>
+</div>
+<!-- <div class='container'>
+
+	<h2> How to Use:</h2>
+
+
+
+	<h4>1. Select the number of genes you want to compare.<br>2. Enter the gene symbol(s) you wish to lookup.<br>3. Press the search button, and the experimental data from Barre's lab will be visualized.
+	</h4>
+
+</div> -->
+{% endblock %}

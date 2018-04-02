@@ -89,7 +89,7 @@ body {
 #footer {
 
 	/* border-top: thick solid #7a737f4f; */
-  position: absolute;
+  position: fixed !important;
   bottom: 0px;
   width: 100%;
 
@@ -140,6 +140,6 @@ footer p {
   /* padding: 1.25em; */
   /* font-family: 'Montserrat', sans-serif; */
 /* } */
-#footer{
+/* #footer{
   position: fixed !important;
-}
+} */

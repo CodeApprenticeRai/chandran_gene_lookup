@@ -1,0 +1,16 @@
+{% extends "visualize/base.html" %}
+
+{% block content %}
+
+<body style= "margin-bottom: 100px;">
+  <div id="heatmap-wrapper">
+    {% load static %}
+    <img src=" {{ heatmap }} " style= "display: block; margin: auto">
+  </div>
+    <!-- <div class = "container"><h2>Graph of Experimental Results -->
+       <!-- {%for g in gene_symbols%} {{g}}, {% endfor %}  -->
+      <!-- <br><small>Comparison of: </small></h2> -->
+    <!-- </div> -->
+</body>
+
+{% endblock %}
