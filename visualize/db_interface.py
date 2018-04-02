@@ -5,7 +5,7 @@ import sys
 # import plotly.graph_objs as go
 
 def get_row(gene_symbol):
-	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="", password="", db="uf_gene_comp")
+	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="TareG", password="iloveyou", db="uf_gene_comp")
 
 	cursor = conn.cursor()
 
@@ -29,7 +29,7 @@ def get_row(gene_symbol):
 	return data[0]
 
 def get_col_names():
-	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="", password="", db="uf_gene_comp")
+	conn = MySQLdb.connect(host="uf-gene-comp.cfkwbxqw8ftv.us-east-2.rds.amazonaws.com", user="TareG", password="iloveyou", db="uf_gene_comp")
 
 	cursor = conn.cursor()
 
