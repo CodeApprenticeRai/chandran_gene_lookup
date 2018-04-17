@@ -47,7 +47,7 @@ def visualize(request):
     #   file=sys.stderr)
 
 
-    processed_gene_symbols = local_functions.process_raw_symbols(raw_gene_symbols)
+    processed_gene_symbols = local_functions.process_raw_symbols(raw_genes_list)
 
     print("//\n\nlength of PG:{}\n\n".format(len(processed_gene_symbols)),
       file=sys.stderr)
@@ -74,8 +74,10 @@ def visualize(request):
         context = {'heatmap': 'heatmap'}
         return render(request, 'visualize/heatmap.html', context)
 
-    # else:
-    return render(request, 'visualize/index1_1.html')
+    else:
+        error_message = "One of the gene's you entered was not found in our Database"
+        context = { "error_message": error_message }
+        return render(request, 'visualize/index1_1.html', context)
 
 
     # one_gene = len( processed_gene_symbols ) == 1

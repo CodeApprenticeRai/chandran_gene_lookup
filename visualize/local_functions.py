@@ -16,9 +16,9 @@ def process_raw_symbols(raw_symbols): # raw_symbols is string
 				gene_symbols = raw_symbols.split(check_symbol)
 				break
 
-		for i in range( len( gene_symbols ) ):
-			for check_symbol in check_symbols:
-				gene_symbols[i] = gene_symbols[i].replace(check_symbol, "")
+	for i in range( len( gene_symbols ) ):
+		for check_symbol in check_symbols:
+			gene_symbols[i] = gene_symbols[i].replace(check_symbol, "")
 
 
 	pattern = re.compile('[\W_]+')
@@ -29,10 +29,6 @@ def process_raw_symbols(raw_symbols): # raw_symbols is string
 		else:
 			for i in range(len(gene_symbols)):
 				gene_symbols[i] = pattern.sub('', gene_symbols[i])
-
-
-
-
 
 	processed_symbols = gene_symbols
 
