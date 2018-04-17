@@ -11,11 +11,28 @@ django.setup()
 # -----------------------------
 
 # Actual code starts here.
+
+import matplotlib
+matplotlib.use('Agg')
+
 import numpy as np
 import seaborn as sns
+
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from visualize.models import *
+
+# f
+
+def drop_dne(gene_symbols):
+    new_symbols = []
+
+    results = list(map((lambda x: len(CerebellumRankedGenes.objects.filter(ilmn_gene=x) ) > 0) , gene_symbols))
+    for i in range(len(gene_symbols)):
+        if results[i]:
+           new_symbols.append(gene_symbols[i])
+    return new_symbols
 
 def create_heatmap(gene_symbols):
     # gene_symbols = ['FXN','1110032E23RIK','GMFG'] # RPP21,RHBDD1,RHOJ
